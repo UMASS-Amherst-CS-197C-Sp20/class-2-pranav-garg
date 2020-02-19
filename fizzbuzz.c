@@ -15,10 +15,25 @@ int main(void) {
   // Open a file for writing.
   FILE* out = fopen("fizzbuzz.txt", "w");
   // Demonstrate file I/O.
-  fprintf(out, "This doesn't work yet!\n");
+  for(int i=0; i<=100; i++) {
+    if(i%15==0) {
+      fprintf(out, "FizzBuzz\n");
+    }
+    else if(i%3==0) {
+      fprintf(out, "Fizz\n");
+    }
+    else if(i%5==0) {
+      fprintf(out, "Buzz\n");
+    }
+    else {
+      fprintf(out, "%d \n", i);
+    }
+  }
+  
 
   // We need to close the file we're writing to, otherwise we may lose data.
   fclose(out);
   // Tell the shell/terminal that we were successful.
   return 0;
+
 }
