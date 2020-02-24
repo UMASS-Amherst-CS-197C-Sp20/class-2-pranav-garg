@@ -24,18 +24,57 @@
 //CODE BEGINS HERE
 
 //include fprintf and fscanf
-
+#include<stdio.h>
 //begin your main function
-
+int main() {
 //open ints.txt, chars.txt, and floats.txt for writing
+FILE* intsout = fopen("ints.txt", "w");
+FILE* charsout = fopen("chars.txt", "w");
+FILE* floatsout = fopen("floats.txt", "w");
 //open input.txt for reading
+FILE* fp = fopen("input.txt", "r");
 //don't forget that the file access mode is different for each!
 
 //create a char variable to hold the flags you read	
-
+char flag;
+char garbage;
 //create an int, char, and float variable to hold the int, char, and float values you read
-
+char datai;
+char datac;
+char dataf;
 //while fscanf does not return an EOF error
+while((flag = fgetc(fp))!=EOF) {
+	if(flag=='C'){
+		garbage = fgetc(fp);
+		datac = fgetc(fp);
+		fprintf(charsout, "%c", datac);
+		fprintf(charsout, "%c", ' ');
+		garbage = fgetc(fp); 
+	}
+	else if(flag=='I'){
+		garbage = fgetc(fp);
+		while((datai = fgetc(fp))!=EOF) {
+			if((datai==' ')||(datai=='\n')||(datai=='\0')){
+				break;
+			}
+			fprintf(intsout, "%c", datai);
+		}
+		fprintf(intsout, "%c", ' ');
+	}
+	else if(flag=='F'){
+		garbage = fgetc(fp);
+		while((dataf = fgetc(fp))!=EOF) {
+			if((dataf==' ')||(dataf=='\n')||(dataf=='\0')){
+				break;
+			}
+			fprintf(floatsout, "%c", dataf);
+		}
+		fprintf(floatsout, "%c", ' ');
+	}
+}
+fclose(fp);
+return 0;
+}
 //read in a flag from input.txt
 
 //if it stands for an int
@@ -52,3 +91,4 @@
 
 //once fscanf returns and EOF error return a successful exit status
 
+	 
